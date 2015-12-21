@@ -31,3 +31,15 @@ glm.pred=rep("Down",252)
 glm.pred[glm.probs>.5]="Up"
 table(glm.pred,Direction.2005)
 mean(glm.pred==Direction.2005)
+
+#testing with less predictors
+glm.fit=glm(Direction~Lag1+Lag2 ,data=Smarket ,family =binomial, subset =train)
+glm.probs=predict(glm.fit,Smarket.2005,type="response")
+glm.pred=rep("Down",252)
+glm.pred[glm.probs>.5]="Up"
+table(glm.pred,Direction.2005)
+
+#Linear Discriminant Analysis
+library(MASS)
+lda.fit=lda(Direction~Lag1+Lag2,data=Smarket,subset=train)
+lda.fit
